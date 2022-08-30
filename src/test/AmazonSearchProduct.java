@@ -19,18 +19,20 @@ public class AmazonSearchProduct {
 		// TODO Auto-generated method stub
 
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-
+		
+		//Lauch amazone.in
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://www.amazon.in/");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
-
+		
+		//Search Samsung product
 		WebElement SearchProduct = driver.findElement(By.id("twotabsearchtextbox"));
 		SearchProduct.sendKeys("Samsung");
 		WebElement search = driver.findElement(By.id("nav-search-submit-button"));
 		search.click();
 
-		// List all samsung mobile product
+		// List all samsung product with price
 		List<WebElement> productlist = driver.findElements(By.xpath("//div[@class='a-section']//span[starts-with(text(),'Samsung ')]"));
 		List<WebElement> pricelist = driver.findElements(By.xpath("//div[@data-component-type='s-search-result']//span[@class='a-price']"));
 
@@ -42,14 +44,14 @@ public class AmazonSearchProduct {
 
 		}
 
-		// sort option by:Featured,price high to low, price low to high......
+		// Sort product by:Featured,price high to low, price low to high......
 		WebElement SortBy = driver.findElement(By.className("a-dropdown-prompt"));
 		SortBy.click();
 		String option = "Featured";
 		WebElement selectoption = driver.findElement(By.xpath("//a[contains(text(),'" + option + "')]"));
 		selectoption.click();
 
-		// to select product
+		//Switch to the new window to select product
 		WebElement selectProduct = driver.findElement(By.xpath("//span[contains(text(),'Samsung Galaxy M53 5G (Mystique Green, 6GB, 128GB Storage)')]"));
 		selectProduct.click();
 
@@ -59,7 +61,7 @@ public class AmazonSearchProduct {
 		String childwindow = itr.next();
 		driver.switchTo().window(childwindow);
 
-		// To add protection plan
+		// Add protection plan
 		WebElement protectionPlan = driver.findElement(By.xpath("//input[@id='mbb-offeringID-1']"));
 		protectionPlan.click();
 
@@ -68,15 +70,15 @@ public class AmazonSearchProduct {
 		Select NumQuantity = new Select(Quantity);
 		NumQuantity.selectByIndex(1);
 
-		// To add in the card
+		// Add product in to the card
 		WebElement AddToCard = driver.findElement(By.xpath("//input[@id='add-to-cart-button']"));
 		AddToCard.click();
 
-		// To buy
+		// Buy Product 
 		WebElement BuyProduct = driver.findElement(By.xpath("//input[@id='buy-now-button']"));
 		BuyProduct.click();
 
-		// To create Amazon account
+		// Create Amazon account
 		WebElement CreateAc = driver.findElement(By.xpath("//a[@id='createAccountSubmit']"));
 		CreateAc.click();
 
